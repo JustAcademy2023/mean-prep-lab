@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MEAN Stack Developer Interview Questions & Preparation Guide</title>
+<meta name="description" content="Flip real MEAN stack interview questions, trace a request through MongoDB, Express, Angular and Node.js, and follow a calm prep plan.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=Figtree:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#1a0b3b;--purple:#5b2bd9;--deep:#2a1166;--yellow:#ffd60a;--blue:#19e3ff;--white:#fff;--soft:#f4f0ff}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:Figtree,system-ui,sans-serif;color:var(--ink);background:var(--white);line-height:1.6}
+h1,h2,h3,.logo{font-family:'Bricolage Grotesque',Georgia,sans-serif;line-height:1.1}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
+.wrap{max-width:1100px;margin:0 auto;padding:0 22px}
+header{position:sticky;top:0;z-index:10;background:var(--ink);color:var(--white)}
+.bar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 22px;max-width:1100px;margin:0 auto}
+.logo{font-weight:800;font-size:1.25rem;text-decoration:none;display:flex;align-items:center;gap:10px}
+.logo i{width:30px;height:30px;border-radius:50% 50% 50% 8px;background:var(--yellow);display:grid;place-items:center;color:var(--ink);font-style:normal;font-size:.95rem}
+nav{display:flex;gap:20px;align-items:center}
+nav a{text-decoration:none;font-size:.95rem;opacity:.85}
+nav a:hover{opacity:1;color:var(--blue)}
+.btn{display:inline-block;padding:12px 22px;border-radius:999px;background:var(--yellow);color:var(--ink);font-weight:600;text-decoration:none;border:0;cursor:pointer;font:600 1rem Figtree,sans-serif;transition:transform .15s,box-shadow .15s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 6px 0 var(--blue)}
+.btn.ghost{background:transparent;color:var(--white);border:2px solid var(--blue)}
+.hero{background:var(--ink);color:var(--white);padding:64px 0 90px;position:relative;overflow:hidden}
+.hero:after{content:"";position:absolute;right:-120px;top:-120px;width:360px;height:360px;border-radius:50%;background:var(--purple);opacity:.55}
+.hero .wrap{position:relative;z-index:1}
+h1{font-size:clamp(2.3rem,6vw,4.4rem);font-weight:800;max-width:15ch}
+.lead{max-width:56ch;margin:18px 0 28px;font-size:1.12rem;opacity:.9}
+.stage{margin-top:46px;background:var(--deep);border:2px solid var(--blue);border-radius:28px;padding:28px;box-shadow:0 0 40px rgba(25,227,255,.25)}
+.track{position:relative;display:grid;grid-template-columns:repeat(4,1fr);gap:10px;padding-top:34px}
+.track:before{content:"";position:absolute;left:12%;right:12%;top:18px;height:4px;background:rgba(255,255,255,.2);border-radius:4px}
+.packet{position:absolute;top:8px;left:12%;width:24px;height:24px;border-radius:50%;background:var(--yellow);box-shadow:0 0 18px var(--yellow);transform:translateX(-50%);transition:left .6s cubic-bezier(.6,-.3,.3,1.3)}
+.node{background:rgba(255,255,255,.08);color:var(--white);border:2px solid transparent;border-radius:18px;padding:14px 8px;cursor:pointer;font:600 1rem Figtree,sans-serif;transition:.2s}
+.node b{display:block;font-family:'Bricolage Grotesque',serif;font-size:1.7rem;color:var(--yellow)}
+.node[aria-pressed=true]{border-color:var(--blue);background:rgba(25,227,255,.15)}
+.say{min-height:96px;margin-top:22px;padding:18px 20px;background:var(--white);color:var(--ink);border-radius:18px;border-left:10px solid var(--yellow)}
+.say h3{font-size:1.2rem;margin-bottom:4px}
+.row{display:flex;gap:12px;flex-wrap:wrap;margin-top:20px}
+section{padding:78px 0}
+h2{font-size:clamp(1.8rem,4vw,2.8rem);font-weight:800;max-width:20ch;margin-bottom:12px}
+.sub{max-width:60ch;margin-bottom:30px;opacity:.85}
+.chips{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:26px}
+.chip{padding:9px 18px;border-radius:999px;border:2px solid var(--purple);background:var(--white);color:var(--purple);font:600 .95rem Figtree,sans-serif;cursor:pointer}
+.chip[aria-pressed=true]{background:var(--purple);color:var(--white)}
+.deck{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:20px}
+.card{perspective:900px;height:230px;background:none;border:0;cursor:pointer;text-align:left}
+.in{position:relative;width:100%;height:100%;transition:transform .55s;transform-style:preserve-3d}
+.card.flip .in{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;border-radius:24px;padding:22px;display:flex;flex-direction:column;justify-content:space-between;overflow:auto}
+.front{background:var(--purple);color:var(--white);border-bottom:8px solid var(--yellow)}
+.front h3{font-size:1.25rem}
+.tag{align-self:flex-start;background:var(--blue);color:var(--ink);border-radius:999px;padding:3px 12px;font-size:.82rem;font-weight:600}
+.back{background:var(--soft);transform:rotateY(180deg);border:2px solid var(--purple);font-size:.95rem;justify-content:center}
+.mini{font-size:.85rem;opacity:.8}
+.prep{background:var(--soft)}
+.prep .grid{display:grid;grid-template-columns:1fr 1fr;gap:34px;align-items:start}
+.meter{height:18px;border-radius:99px;background:var(--white);border:2px solid var(--purple);overflow:hidden;margin:14px 0 6px}
+.meter div{height:100%;width:0;background:linear-gradient(90deg,var(--purple),var(--blue));transition:width .4s}
+.todo{list-style:none;display:grid;gap:10px}
+.todo label{display:flex;gap:12px;align-items:flex-start;background:var(--white);padding:14px 16px;border-radius:16px;cursor:pointer;border:2px solid transparent}
+.todo input{accent-color:var(--purple);width:20px;height:20px;margin-top:3px}
+.todo input:checked+span{text-decoration:line-through;opacity:.55}
+.todo label:has(input:checked){border-color:var(--yellow)}
+.links{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px}
+.link{display:flex;flex-direction:column;justify-content:space-between;gap:14px;min-height:170px;padding:22px;border-radius:24px;text-decoration:none;transition:transform .2s}
+.link:hover{transform:translateY(-6px) rotate(-.6deg)}
+.link h3{font-size:1.15rem}
+.link.c{background:var(--ink);color:var(--white);border-bottom:8px solid var(--blue)}
+.link.b{background:var(--yellow);color:var(--ink)}
+.link span{font-weight:600;font-size:.92rem}
+.mid{margin:44px 0 18px;font-family:'Bricolage Grotesque',serif;font-size:1.6rem}
+footer{background:var(--ink);color:var(--white);padding:50px 0 30px}
+.fg{display:flex;flex-wrap:wrap;gap:30px;justify-content:space-between}
+footer a{display:block;text-decoration:none;opacity:.85;margin:6px 0}
+footer a:hover{color:var(--blue);opacity:1}
+footer small{display:block;margin-top:30px;opacity:.6}
+@media(max-width:760px){nav a:not(.btn){display:none}.prep .grid{grid-template-columns:1fr}.track{gap:6px}.node{font-size:.8rem}.node b{font-size:1.3rem}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<header><div class="bar">
+<a class="logo" href="#top"><i>M</i>MEAN Prep Lab</a>
+<nav><a href="#cards">Flashcards</a><a href="#plan">Prep plan</a><a href="#learn">Keep learning</a><a class="btn" href="https://www.justacademy.co/register-for-course-demo" target="_blank" rel="noopener">Book a free demo</a></nav>
+</div></header>
+
+<main id="top">
+<div class="hero"><div class="wrap">
+<h1>Every interview question is a request in disguise.</h1>
+<p class="lead">Send one through MongoDB, Express, Angular and Node.js, then flip real MEAN stack developer interview questions until the answers feel like your own words.</p>
+<div class="stage" aria-live="polite">
+<div class="track" id="track">
+<div class="packet" id="packet"></div>
+<button class="node" aria-pressed="true" data-i="0"><b>A</b>Angular</button>
+<button class="node" aria-pressed="false" data-i="1"><b>E</b>Express</button>
+<button class="node" aria-pressed="false" data-i="2"><b>N</b>Node.js</button>
+<button class="node" aria-pressed="false" data-i="3"><b>M</b>MongoDB</button>
+</div>
+<div class="say" id="say"></div>
+<div class="row"><button class="btn" id="send">Send a request</button><a class="btn ghost" href="#cards">Jump to flashcards</a></div>
+</div>
+</div></div>
+
+<section id="cards"><div class="wrap">
+<h2>Tap a card. Say the answer out loud.</h2>
+<p class="sub">Reading answers feels like progress, but explaining them is what panels hear. Pick a layer, flip a card and answer before you peek.</p>
+<div class="chips" id="chips"></div>
+<div class="deck" id="deck"></div>
+<p class="mid">Want the full written answers?</p>
+<div class="links"><a class="link b" href="https://www.justacademy.co/blog-detail/mean-stack-developer-interview-questions-preparation-guide" target="_blank" rel="noopener"><h3>MEAN Stack Developer Interview Questions & Preparation Guide</h3><span>Read the full guide</span></a></div>
+</div></section>
+
+<section class="prep" id="plan"><div class="wrap grid">
+<div><h2>Four calm weeks beat one panicked night.</h2><p class="sub">Tick each step as you finish it. The bar fills as your confidence does.</p>
+<div class="meter"><div id="bar"></div></div><p class="mini" id="pct">0 of 6 done</p></div>
+<ul class="todo" id="todo"></ul>
+</div></section>
+
+<section id="learn"><div class="wrap">
+<h2>Learn it live, with a mentor beside you.</h2>
+<p class="sub">Instructor led, mentor led and online for learners across Delhi. Pick the path that fits the job you want.</p>
+<div class="links">
+<a class="link c" href="https://www.justacademy.co/job-bootcamp-detail/delhi/mean-stack-developer-course-in-delhi-live-online-angular-enterprise-web-development-training" target="_blank" rel="noopener"><h3>MEAN Stack Developer Course in Delhi</h3><span>Angular, Node.js, Express and MongoDB, live online</span></a>
+<a class="link c" href="https://www.justacademy.co/job-bootcamp-detail/delhi/full-stack-developer-pro-bootcamp-in-delhi-live-online-software-engineering-product-development-program" target="_blank" rel="noopener"><h3>Full Stack Developer Pro Bootcamp in Delhi</h3><span>Software engineering and product building</span></a>
+<a class="link c" href="https://www.justacademy.co/job-bootcamp-detail/delhi/mern-stack-developer-course-in-delhi-live-online-react-full-stack-product-development-training" target="_blank" rel="noopener"><h3>MERN Stack Developer Course in Delhi</h3><span>Prefer React? Start here</span></a>
+<a class="link c" href="https://www.justacademy.co/course-detail/delhi/python-training-in-delhi" target="_blank" rel="noopener"><h3>Python Training in Delhi</h3><span>Scripting and back end thinking</span></a>
+</div>
+<p class="mid">Keep reading</p>
+<div class="links">
+<a class="link b" href="https://www.justacademy.co/blog-detail/mean-stack-development-explained-angular-nodejs-mongodb-career-guide" target="_blank" rel="noopener"><h3>MEAN stack development explained</h3><span>Angular, Node.js, MongoDB and your career</span></a>
+<a class="link b" href="https://www.justacademy.co/blog-detail/mern-stack-developer-skills-companies-look-for-in-2026" target="_blank" rel="noopener"><h3>MERN stack developer skills companies look for in 2026</h3><span>See what hiring teams want</span></a>
+<a class="link b" href="https://www.justacademy.co/blog-detail/best-full-stack-development-course-for-beginners-in-2026" target="_blank" rel="noopener"><h3>Best full stack development course for beginners in 2026</h3><span>Choose your first course wisely</span></a>
+</div>
+<div class="row" style="margin-top:36px"><a class="btn" href="https://www.justacademy.co/register-for-course-demo" target="_blank" rel="noopener">Book a free demo class</a></div>
+</div></section>
+</main>
+
+<footer><div class="wrap"><div class="fg">
+<div><a class="logo" href="#top"><i>M</i>MEAN Prep Lab</a><p class="mini" style="max-width:34ch;margin-top:8px">A playful study space for MEAN stack interview preparation.</p></div>
+<div><a href="#cards">Flashcards</a><a href="#plan">Prep plan</a><a href="#learn">Keep learning</a></div>
+<div><a href="https://www.justacademy.co/job-bootcamp-detail/delhi/mean-stack-developer-course-in-delhi-live-online-angular-enterprise-web-development-training" target="_blank" rel="noopener">MEAN course in Delhi</a><a href="https://www.justacademy.co/blog-detail/mean-stack-developer-interview-questions-preparation-guide" target="_blank" rel="noopener">Interview guide</a><a href="https://www.justacademy.co/register-for-course-demo" target="_blank" rel="noopener">Free demo</a></div>
+</div><small>Built for learners preparing for MEAN stack developer jobs. Share it, fork it, make it yours.</small></div></footer>
+
+<script>
+const steps=[
+["Angular catches the click","A component hears the click, calls a service, and the HttpClient sends a request to your API."],
+["Express picks the route","It matches the URL and method, runs middleware such as the login check, then hands over to your handler."],
+["Node.js does the work","The runtime runs your handler without blocking, so thousands of other requests keep moving."],
+["MongoDB stores the document","Mongoose saves it, the answer returns as JSON, and Angular redraws the screen."]];
+const nodes=[...document.querySelectorAll('.node')],say=document.getElementById('say'),packet=document.getElementById('packet');
+function go(i){nodes.forEach((n,k)=>n.setAttribute('aria-pressed',k===i));packet.style.left=(12.5+i*25)+'%';say.innerHTML='<h3>'+steps[i][0]+'</h3><p>'+steps[i][1]+'</p>'}
+nodes.forEach((n,i)=>n.onclick=()=>go(i));
+document.getElementById('send').onclick=()=>{[0,1,2,3].forEach(i=>setTimeout(()=>go(i),i*1100))};
+go(0);
+const qs=[
+["MongoDB","When do you embed and when do you reference?","Embed small data read together with the parent, like an address. Reference data that grows without limit or is shared, like comments."],
+["MongoDB","What does an index do?","It lets MongoDB jump to matching documents instead of scanning the whole collection. It speeds reads and costs a little on writes."],
+["Express","What is middleware?","A function between the request and the handler. It can log, parse, check a token or end the response, and order matters."],
+["Express","How do you protect a route?","Verify a signed JWT in middleware before the handler runs, and store passwords as bcrypt hashes."],
+["Node.js","What is the event loop?","It lets one thread handle many tasks by moving slow work aside and running callbacks when results are ready."],
+["Node.js","Does async await make code synchronous?","No. It makes waiting read like normal code, but the work is still asynchronous. Wrap it in try and catch."],
+["Angular","How do observables differ from promises?","A promise gives one value once. An observable can give many values over time and can be cancelled."],
+["Angular","Why use dependency injection?","Classes receive what they need, so code stays loosely coupled and a fake service can replace the real one in tests."]];
+const cats=["All","MongoDB","Express","Node.js","Angular"],chips=document.getElementById('chips'),deck=document.getElementById('deck');
+function draw(c){deck.innerHTML='';qs.filter(q=>c==="All"||q[0]===c).forEach(q=>{const b=document.createElement('button');b.className='card';b.setAttribute('aria-label','Flip card: '+q[1]);b.innerHTML='<div class="in"><div class="face front"><span class="tag">'+q[0]+'</span><h3>'+q[1]+'</h3><span class="mini">Tap to flip</span></div><div class="face back"><p>'+q[2]+'</p></div></div>';b.onclick=()=>b.classList.toggle('flip');deck.appendChild(b)})}
+cats.forEach(c=>{const b=document.createElement('button');b.className='chip';b.textContent=c;b.setAttribute('aria-pressed',c==="All");b.onclick=()=>{[...chips.children].forEach(x=>x.setAttribute('aria-pressed',x===b));draw(c)};chips.appendChild(b)});
+draw("All");
+const plan=["Week one: JavaScript and TypeScript basics","Week two: build a small Express API","Week three: swap in MongoDB with Mongoose","Week four: connect an Angular screen to your API","Deploy the project on a public address","Explain three concepts out loud, every day"];
+const todo=document.getElementById('todo'),bar=document.getElementById('bar'),pct=document.getElementById('pct');
+plan.forEach(t=>{const li=document.createElement('li');li.innerHTML='<label><input type="checkbox"><span>'+t+'</span></label>';todo.appendChild(li)});
+todo.onchange=()=>{const n=todo.querySelectorAll('input:checked').length;bar.style.width=(n/plan.length*100)+'%';pct.textContent=n+' of '+plan.length+' done'+(n===plan.length?'. You are ready.':'')};
+</script>
+</body>
+</html>
